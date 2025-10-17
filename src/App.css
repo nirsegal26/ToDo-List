@@ -1,220 +1,290 @@
-/* App.css - עיצוב מקצועי ומותאם לעברית (RTL) */
+/* =========================================================
+   🌙 Dark Responsive Todo App - Inspired by Ignite Design
+   ========================================================= */
 
-/* איפוס בסיסי - נשמר נקי */
+:root {
+  --blue: #4EA8DE;
+  --blue-dark: #1E6F9F;
+  --blue-light: #6FC3FF;
+  --purple: #8284FA;
+  --purple-dark: #5E60CE;
+  --danger: #E25858;
+
+  --gray-100: #F2F2F2;
+  --gray-200: #D9D9D9;
+  --gray-300: #808080;
+  --gray-400: #333333;
+  --gray-500: #262626;
+  --gray-600: #1A1A1A;
+  --gray-700: #0D0D0D;
+
+  --radius: 14px;
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* איפוס בסיסי */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* הגדרות גופן וגודל בסיסי */
-html {
-  font-size: 16px; /* גודל בסיסי סטנדרטי */
+/* טיפוגרפיה כללית */
+body,
+input,
+button {
+  font-family: 'Inter', 'Rubik', 'Noto Sans Hebrew', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  direction: rtl;
 }
 
 body {
+  background-color: var(--gray-700);
+  color: var(--gray-100);
   min-height: 100vh;
-  /* שימוש בגופן תומך עברית, אם זמין, כדאי לשקול ייבוא גופן Google Noto Sans Hebrew */
-  font-family: 'Rubik', 'Roboto', sans-serif; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f7f7f7; /* רקע בהיר ונעים */
 }
 
-/* הגדרת כיווניות גלובלית לימין-שמאל */
-body, .App {
-    direction: rtl; 
-    text-align: right; 
-}
-
-/* ---------------------------------------------------- */
-
-/* 2. מבנה האפליקציה הראשית */
+/* =========================================================
+   APP CONTAINER
+   ========================================================= */
 .App {
+  width: 100%;
+  max-width: 520px;
+  min-height: 90vh;
+  background: var(--gray-600);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  height: 100vh; 
-  width: 95%; /* שימוש באחוזים לגמישות */
-  max-width: 500px;
-  background-color: #ffffff; /* רקע לבן לקופסה הראשית */
-  border: 1px solid #ddd;
-  border-radius: 12px; /* פינות מעוגלות עדינות */
-  margin: 1rem auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* הוספת צל עדין */
+  overflow: hidden;
+  position: relative;
 }
 
-/* 3. כותרת עליונה (Header) */
+/* =========================================================
+   HEADER
+   ========================================================= */
 header {
-  width: 100%;
-  padding: 1rem;
-  background-color: #007bff; /* צבע כחול נעים */
-  color: white;
-  display: flex;
-  /* מותאם RTL: ה-justify-content נשאר כפי שהוא, אם רוצים כיתוב בצד ימין */
-  justify-content: flex-start; 
-  align-items: center;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  background: linear-gradient(90deg, var(--blue-dark), var(--purple-dark));
+  color: var(--gray-100);
+  padding: 1.2rem 1rem;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 header h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--blue-light);
+  text-transform: uppercase;
 }
 
-/* ---------------------------------------------------- */
-
-/* 4. גוף האפליקציה (Main Content) */
-main {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  /* מותאם RTL: יישור התוכן לימין (בדרך כלל flex-start) */
-  justify-content: flex-start; 
-  align-items: flex-start;
-  padding: 1rem 0; /* מרווח פנימי עליון ותחתון */
-  overflow-y: auto;
-}
-
-/* 5. רשימת המטלות (List & Items) */
-ul {
-  width: 100%;
-  list-style: none;
-  padding: 0 1rem; /* מרווח פנימי מימין ומשמאל לרשימה */
-}
-
-.item {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.5rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  border-left: 5px solid #007bff; /* הוספת פס כחול עדין בצד ימין (צד התחלה) */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.item:hover {
-    background-color: #f1f1f1;
-}
-
-/* התאמת אלמנטים פנימיים ל-RTL */
-.item input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
-  min-height: 20px;
-  cursor: pointer;
-  /* מותאם RTL: מרווח משמאל לפריט (צד סוף) */
-  margin-left: 1rem; 
-  margin-right: 0; 
-}
-
-.item > label {
-  font-size: 1rem;
-  flex-grow: 1;
-  text-align: right;
-  padding: 0 0.5rem;
-  cursor: pointer;
-}
-
-/* אייקון המחיקה */
-.item svg {
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  font-size: 1.2rem;
-  color: #a0a0a0;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.item svg:focus, 
-.item svg:hover {
-  color: #dc3545; /* אדום ברור למחיקה */
-  outline: none;
-}
-
-/* ---------------------------------------------------- */
-
-/* 6. טופס הוספת פריט (AddItem) */
-.addForm {
-  width: 100%;
-  display: flex;
-  /* מותאם RTL: יישור לימין */
-  justify-content: flex-start; 
-  padding: 0 1rem 1rem; 
-}
-
-.addForm input[type='text'] {
-  flex-grow: 1;
-  min-height: 40px;
-  font-size: 1rem;
-  padding: 0 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  /* מותאם RTL: מרווח משמאל (צד סוף) */
-  margin-left: 0.5rem; 
-  margin-right: 0;
-}
-
-/* 7. כפתור הוספה */
-button {
-  height: 40px;
-  min-width: 40px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-button:focus, 
-button:hover {
-  background-color: #0056b3;
-  outline: none;
-}
-
-/* 8. טופס חיפוש (SearchForm) */
+/* =========================================================
+   SEARCH BAR
+   ========================================================= */
 .searchForm {
   width: 100%;
   display: flex;
-  /* מותאם RTL: יישור לימין */
-  justify-content: flex-start; 
-  padding: 0 1rem 1rem; 
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.8rem 1rem;
+  background: var(--gray-500);
+  border-bottom: 1px solid var(--gray-400);
+  gap: 0.5rem;
 }
 
 .searchForm input[type='text'] {
   flex-grow: 1;
-  min-height: 40px;
+  min-height: 42px;
   font-size: 1rem;
-  padding: 0 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: none;
+  border-radius: 10px;
+  background: var(--gray-400);
+  color: var(--gray-100);
+  padding: 0.6rem 0.8rem;
+  transition: 0.3s;
 }
 
-/* 9. כיתוב רשימה ריקה */
-main p {
-    padding: 1rem;
-    color: #6c757d;
-    font-size: 1.1rem;
+.searchForm input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(78, 168, 222, 0.6);
 }
 
-/* ---------------------------------------------------- */
+/* =========================================================
+   MAIN
+   ========================================================= */
+main {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background: var(--gray-600);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-/* 10. פוטר (Footer) */
-footer {
+/* =========================================================
+   TASK ITEMS
+   ========================================================= */
+ul {
   width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: white;
-  /* מותאם RTL: יישור לימין (יחד עם text-align: right ב-body) */
-  text-align: right; 
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  background: var(--gray-500);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.item:hover {
+  transform: scale(1.02);
+  background: var(--gray-400);
+}
+
+.item input[type="checkbox"] {
+  margin-left: 0.8rem;
+  accent-color: var(--blue);
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.item label {
+  flex: 1;
+  font-size: 1rem;
+  color: var(--gray-100);
+  text-align: right;
+  cursor: pointer;
+}
+
+.item svg {
+  width: 24px;
+  height: 24px;
+  color: var(--gray-300);
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.item svg:hover {
+  color: var(--danger);
+  transform: scale(1.2);
+}
+
+/* =========================================================
+   ADD FORM
+   ========================================================= */
+.addForm {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.8rem 1rem;
+  gap: 0.5rem;
+  background: var(--gray-500);
+  border-top: 1px solid var(--gray-400);
+}
+
+.addForm input[type='text'] {
+  flex-grow: 1;
+  min-height: 44px;
+  background: var(--gray-400);
+  color: var(--gray-100);
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  transition: 0.3s;
+}
+
+.addForm input:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(130, 132, 250, 0.6);
+}
+
+.addForm button {
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: var(--gray-100);
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.addForm button:hover {
+  background: linear-gradient(135deg, var(--blue-light), var(--purple-dark));
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  background: var(--gray-700);
+  color: var(--gray-200);
+  text-align: center;
+  padding: 0.8rem;
+  border-top: 1px solid var(--gray-500);
   font-size: 0.9rem;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+@media (max-width: 768px) {
+  .App {
+    max-width: 95%;
+  }
+
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  .addForm input,
+  .searchForm input {
+    font-size: 0.9rem;
+  }
+
+  .item label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .App {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .addForm,
+  .searchForm {
+    padding: 0.5rem;
+  }
+
+  .item {
+    padding: 0.6rem;
+  }
+
+  .addForm button {
+    padding: 0.5rem 0.8rem;
+  }
 }
