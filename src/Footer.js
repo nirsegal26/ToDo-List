@@ -1,8 +1,8 @@
 const Footer = ({length}) => {
     return (
-    <div>
-        <p>You have {length} unfinished missions</p>
-    </div>
+    <footer>
+        <p>You have {length} unfinished {(length!=1) ? "missions" : "mission"}</p>
+    </footer>
     )
 }
 

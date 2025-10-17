@@ -1,185 +1,220 @@
+/* App.css - עיצוב מקצועי ומותאם לעברית (RTL) */
+
+/* איפוס בסיסי - נשמר נקי */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* הגדרות גופן וגודל בסיסי */
 html {
-  font-size: 22px;
+  font-size: 16px; /* גודל בסיסי סטנדרטי */
 }
 
 body {
   min-height: 100vh;
-  font-family: 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /* שימוש בגופן תומך עברית, אם זמין, כדאי לשקול ייבוא גופן Google Noto Sans Hebrew */
+  font-family: 'Rubik', 'Roboto', sans-serif; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f7f7f7; /* רקע בהיר ונעים */
 }
 
+/* הגדרת כיווניות גלובלית לימין-שמאל */
+body, .App {
+    direction: rtl; 
+    text-align: right; 
+}
+
+/* ---------------------------------------------------- */
+
+/* 2. מבנה האפליקציה הראשית */
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100vh; 
-  width: 100%; 
+  width: 95%; /* שימוש באחוזים לגמישות */
   max-width: 500px;
-  border: 1px solid mediumblue;
-  margin: auto;
+  background-color: #ffffff; /* רקע לבן לקופסה הראשית */
+  border: 1px solid #ddd;
+  border-radius: 12px; /* פינות מעוגלות עדינות */
+  margin: 1rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* הוספת צל עדין */
 }
 
+/* 3. כותרת עליונה (Header) */
 header {
   width: 100%;
-  padding: 0 0.25em;
-  background-color: mediumblue;
-  color: aliceblue;
+  padding: 1rem;
+  background-color: #007bff; /* צבע כחול נעים */
+  color: white;
   display: flex;
-  justify-content: space-between;
+  /* מותאם RTL: ה-justify-content נשאר כפי שהוא, אם רוצים כיתוב בצד ימין */
+  justify-content: flex-start; 
   align-items: center;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+/* ---------------------------------------------------- */
+
+/* 4. גוף האפליקציה (Main Content) */
 main {
   width: 100%;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: flex-start;
-  align-items: center;
+  /* מותאם RTL: יישור התוכן לימין (בדרך כלל flex-start) */
+  justify-content: flex-start; 
+  align-items: flex-start;
+  padding: 1rem 0; /* מרווח פנימי עליון ותחתון */
   overflow-y: auto;
 }
 
-footer {
-  width: 100%;
-  padding: 0.25em;
-  background-color: mediumblue;
-  color: aliceblue;
-  display: grid;
-  place-content: center;
-}
-
+/* 5. רשימת המטלות (List & Items) */
 ul {
   width: 100%;
   list-style: none;
-  padding: 0 0.25rem 0.25rem;
-}
-
-ul li::before {
-  content: "\200B";
+  padding: 0 1rem; /* מרווח פנימי מימין ומשמאל לרשימה */
 }
 
 .item {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  padding: 0.5rem 0 0.5rem 0.5rem;
-  margin: 0.25rem 0;
-  background-color: #eee;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border-left: 5px solid #007bff; /* הוספת פס כחול עדין בצד ימין (צד התחלה) */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
-.item:first-child {
-  margin: 0;
+.item:hover {
+    background-color: #f1f1f1;
 }
 
+/* התאמת אלמנטים פנימיים ל-RTL */
 .item input[type="checkbox"] {
-  text-align: center;
-  width: 2.5rem;
-  width: 48px;
-  min-width: 48px;
-  height: 2.5rem;
-  height: 48px;
-  min-height: 48px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   cursor: pointer;
-  margin-right: 0.5rem;
-}
-
-.item input[type="checkbox"]:focus + label {
-  text-decoration: underline;
+  /* מותאם RTL: מרווח משמאל לפריט (צד סוף) */
+  margin-left: 1rem; 
+  margin-right: 0; 
 }
 
 .item > label {
-  font-size: 0.75rem;
+  font-size: 1rem;
   flex-grow: 1;
+  text-align: right;
+  padding: 0 0.5rem;
+  cursor: pointer;
 }
 
+/* אייקון המחיקה */
 .item svg {
-  width: 48px;
-  min-width: 48px;
-  height: 36px;
-  font-size: 1rem;
-  color: steelblue;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  color: #a0a0a0;
   cursor: pointer;
+  transition: color 0.2s;
 }
 
 .item svg:focus, 
 .item svg:hover {
-  color: red;
+  color: #dc3545; /* אדום ברור למחיקה */
   outline: none;
 }
 
+/* ---------------------------------------------------- */
+
+/* 6. טופס הוספת פריט (AddItem) */
 .addForm {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
-  margin: 0.5rem 0 0;
-  padding: 0 0.5rem 0.25rem;
-  border-bottom: 1px solid #eee;
-}
-
-.addForm label {
-  position: absolute;
-  left: -99999px;
+  /* מותאם RTL: יישור לימין */
+  justify-content: flex-start; 
+  padding: 0 1rem 1rem; 
 }
 
 .addForm input[type='text'] {
   flex-grow: 1;
-  max-width: calc(100% - 50px);
-  min-height: 48px;
+  min-height: 40px;
   font-size: 1rem;
-  padding: 0.25rem;
-  border-radius: 0.25rem;
-  margin-right: 0.25rem;
-  outline: none;
+  padding: 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  /* מותאם RTL: מרווח משמאל (צד סוף) */
+  margin-left: 0.5rem; 
+  margin-right: 0;
 }
 
+/* 7. כפתור הוספה */
 button {
-  height: 48px;
-  min-width: 48px;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  background-color: aliceblue;
-  color: mediumblue;
+  height: 40px;
+  min-width: 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 button:focus, 
 button:hover {
-  color: white;
-  background-color: limegreen;
+  background-color: #0056b3;
   outline: none;
 }
 
+/* 8. טופס חיפוש (SearchForm) */
 .searchForm {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
-  margin: 0.25rem 0 0;
-  padding: 0 0.5rem 0.25rem;
-  border-bottom: 1px solid #eee;
-}
-
-.searchForm label {
-  position: absolute;
-  left: -99999px;
+  /* מותאם RTL: יישור לימין */
+  justify-content: flex-start; 
+  padding: 0 1rem 1rem; 
 }
 
 .searchForm input[type='text'] {
   flex-grow: 1;
-  max-width: 100%;
-  min-height: 48px;
+  min-height: 40px;
   font-size: 1rem;
-  padding: 0.25rem;
-  border-radius: 0.25rem;
-  outline: none;
+  padding: 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* 9. כיתוב רשימה ריקה */
+main p {
+    padding: 1rem;
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+/* ---------------------------------------------------- */
+
+/* 10. פוטר (Footer) */
+footer {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  /* מותאם RTL: יישור לימין (יחד עם text-align: right ב-body) */
+  text-align: right; 
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  font-size: 0.9rem;
 }
