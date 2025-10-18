@@ -42,7 +42,7 @@ button {
 body {
   background: url(night_background.png);
   color: var(--gray-100);
-  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -251,7 +251,8 @@ footer {
    ========================================================= */
 @media (max-width: 768px) {
   .App {
-    max-width: 95%;
+    /* במקום max-width: 95% שכבר מוגדר, אפשר גם להשאיר כפי שהיה */
+    max-width: 95%; 
   }
 
   header h1 {
@@ -273,12 +274,34 @@ footer {
     font-size: 14px;
   }
 
-  .App {
-    border-radius: 0;
-    box-shadow: none;
+  /* 👈🏼 תיקון Body: 
+     במסכי מובייל צרים, אנו רוצים שהאפליקציה תתפרס על כל רוחב המסך
+     ולכן נבטל את הריפוד (padding) שסביבה.
+     הגדרות אחרות (display, justify-content וכו') שייכות ל-body הכללי 
+     ולא צריכות להיות כאן בתוך שאילתת המדיה.
+  */
+  body {
+    padding: 0;
+    /* הגדרת גובה מינימלי במקום גובה מקסימלי קבוע */
+    min-height: 100vh;
+    max-height: initial; 
   }
 
-  .addForm,
+  .App {
+    /* 👈🏼 תיקון App: 
+       מעבר מ-width: 50vh (שמשתמש בגובה עבור רוחב) ל-width: 100% 
+       כדי לכסות את כל רוחב המסך במובייל.
+    */
+    width: 100%;
+    /* מתיחת הגובה לכל המסך במובייל כדי להראות כמו אפליקציה */
+    min-height: 95vh;
+    /* הסרת העיגול והצל שאינם נחוצים במסך מלא */
+    border-radius: var(--radius);
+    box-shadow: none;
+    
+  }
+  
+  .addForm, 
   .searchForm {
     padding: 0.5rem;
   }

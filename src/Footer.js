@@ -1,7 +1,7 @@
 const Footer = ({length}) => {
     return (
     <footer>
-        <p>You have {length} unfinished {(length!=1) ? "missions" : "mission"}</p>
+        <p>יש לך {length} משימ{(length !== 1) ? "ות" : "ה"} לא גמור{(length !== 1) ? "ות" : "ה"}</p>
     </footer>
     )
 }

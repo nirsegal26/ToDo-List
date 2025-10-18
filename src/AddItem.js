@@ -11,7 +11,7 @@ const AddItem = ({newItem, setNewItem, handleSubmit, inputRef}) => {
         ref={inputRef}
         id='addItem'
         type="text"
-        placeholder="Add Task"
+        placeholder="הוסף משימה"
         required
         value={newItem}
         onChange={(e) => setNewItem(e.target.value)}/>
