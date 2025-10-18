@@ -19,7 +19,7 @@ function App() {
     localStorage.setItem('todolist',JSON.stringify(newItems));
   }
   const addItem = (item) => {
-    const id = items.length ? items[items.length - 1]. id +1 : 1;
+    const id = items.length ? items[items.length - 1].id +1 : 1;
     const myNewItem = {id, checked: false, item};
     const listItems = [...items, myNewItem]
     setAndSaveItems(listItems);
