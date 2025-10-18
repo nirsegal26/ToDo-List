@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import Header from './Header';
 import Content from './Content';
 import Footer from './Footer';
@@ -8,7 +8,8 @@ import AddItem from './AddItem';
 function App() {
   const [items, setItems] = useState(JSON.parse(localStorage.getItem('todolist')));
   const [newItem, setNewItem] = useState('')
-  
+  const inputRef = useRef(null);
+
   const setAndSaveItems = (newItems) => {
     setItems(newItems)
     localStorage.setItem('todolist',JSON.stringify(newItems));
@@ -35,6 +36,9 @@ function App() {
     if (!newItem) return;
     addItem(newItem);
     setNewItem('');
+    if (inputRef.current) {
+      inputRef.current.focus(); 
+    }
   }
 
   const uncheckedCount = items.filter(item => item.checked === false).length;
@@ -46,6 +50,7 @@ function App() {
       newItem={newItem}
       setNewItem={setNewItem}
       handleSubmit={handleSubmit}
+      inputRef={inputRef}
       />
       <Content
       items={items}

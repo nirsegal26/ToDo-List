@@ -40,7 +40,7 @@ button {
 }
 
 body {
-  background-color: var(--gray-700);
+  background: url(night_background.png);
   color: var(--gray-100);
   min-height: 100vh;
   display: flex;
@@ -51,13 +51,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body::selection {
+  background-color: var(--blue-light);
+  color: whitesmoke;
+}
 /* =========================================================
    APP CONTAINER
    ========================================================= */
 .App {
-  width: 100%;
-  max-width: 520px;
-  min-height: 90vh;
+  width: 80vh;
+  height: 95.5vh;
   background: var(--gray-600);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
