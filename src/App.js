@@ -6,7 +6,11 @@ import Footer from './Footer';
 import AddItem from './AddItem';
 
 function App() {
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem('todolist')));
+  const [items, setItems] = useState(() => {
+  const saved = localStorage.getItem('todolist');
+  return saved ? JSON.parse(saved) : [];
+});
+
   const [newItem, setNewItem] = useState('')
   const inputRef = useRef(null);
 
