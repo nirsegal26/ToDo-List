@@ -11,7 +11,9 @@ function App() {
   return saved ? JSON.parse(saved) : [];
 });
 
-  const [newItem, setNewItem] = useState('')
+  const [newItem, setNewItem] = useState('');
+  const [editingId, setEditingId] = useState(null);
+  const [editItemText, setEditItemText] = useState('');
   const inputRef = useRef(null);
 
   const setAndSaveItems = (newItems) => {
@@ -34,6 +36,22 @@ function App() {
       const listItems = items.filter((item) => item.id !== id)
       setAndSaveItems(listItems);
   }
+
+  const handleEdit = (id) => {
+    const itemToEdit = items.find(item => item.id === id);
+    setEditingId(id); 
+    setEditItemText(itemToEdit.item); 
+}
+
+  const handleSave = () => {
+    const listItems = items.map((item) => 
+        item.id === editingId 
+            ? { ...item, item: editItemText }
+            : item 
+    );
+    setAndSaveItems(listItems);
+    setEditingId(null); 
+}
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,6 +78,11 @@ function App() {
       items={items}
       handleCheck={handleCheck} 
       handleDelete={handleDelete}
+      handleEdit={handleEdit}
+      editingId={editingId} 
+      editItemText={editItemText} 
+      setEditItemText={setEditItemText} 
+      handleSave={handleSave} 
       /> 
       <Footer length ={uncheckedCount}/> 
 
