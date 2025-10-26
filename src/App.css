@@ -193,6 +193,15 @@ ul {
   transform: scale(1.2);
 }
 
+.up:hover {
+  color: var(--purple);
+  transform: scale(1.2);
+}
+
+.down:hover {
+  color: var(--purple-dark);
+  transform: scale(1.2);
+}
 .edit-input {
   flex-grow: 1;
   background: var(--gray-400);

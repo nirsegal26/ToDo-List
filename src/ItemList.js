@@ -1,6 +1,7 @@
 import LineItem from "./LineItem";
 
-const ItemList = ({items, handleCheck, handleDelete, handleEdit,editingId, editItemText, setEditItemText, handleSave}) => {
+const ItemList = ({items, handleCheck, handleDelete, handleEdit,editingId, editItemText, setEditItemText, handleSave, handleMoveDown,
+    handleMoveUp}) => {
     return (
         <ul>
             {items.map((item ) => (
@@ -13,7 +14,9 @@ const ItemList = ({items, handleCheck, handleDelete, handleEdit,editingId, editI
                 editingId={editingId} 
                 editItemText={editItemText} 
                 setEditItemText={setEditItemText} 
-                handleSave={handleSave} 
+                handleSave={handleSave}
+                handleMoveDown={handleMoveDown}
+                handleMoveUp={handleMoveUp}
                 />
             ))}
         </ul>

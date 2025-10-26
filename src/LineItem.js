@@ -1,4 +1,4 @@
-import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
+import { FaTrashAlt, FaPencilAlt, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 const LineItem = ({
     item, 
@@ -8,7 +8,9 @@ const LineItem = ({
     editingId, 
     editItemText, 
     setEditItemText, 
-    handleSave 
+    handleSave, 
+    handleMoveDown,
+    handleMoveUp
 }) => {
     
     const isEditing = item.id === editingId;
@@ -57,6 +59,18 @@ const LineItem = ({
                     onClick={() => handleDelete(item.id)}
                     role="button"
                     tabIndex="0"
+                />
+            </div>
+            <div className='arrows'>
+                <FaArrowUp className='up'
+                onClick={() => handleMoveUp(item.id)}
+                aria-label="up"
+                />
+                
+                
+                <FaArrowDown className='down'
+                onClick={() => handleMoveDown(item.id)}
+                aria-label="down"
                 />
             </div>
         </li>

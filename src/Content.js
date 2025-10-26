@@ -1,5 +1,5 @@
 import ItemList from './ItemList'
-const Content = ({items, handleCheck, handleDelete, handleEdit,editingId, editItemText, setEditItemText, handleSave}) => {
+const Content = ({items, handleCheck, handleDelete, handleEdit,editingId, editItemText, setEditItemText, handleSave, handleMoveDown, handleMoveUp}) => {
         
         return (
             <main>
@@ -10,9 +10,11 @@ const Content = ({items, handleCheck, handleDelete, handleEdit,editingId, editIt
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
                 editingId={editingId} 
-                editItemText={editItemText} 
-                setEditItemText={setEditItemText} 
-                handleSave={handleSave} 
+                editItemText={editItemText} 
+                setEditItemText={setEditItemText} 
+                handleSave={handleSave} 
+                handleMoveUp={handleMoveUp}
+                handleMoveDown={handleMoveDown}
                 />
                 ) : <p style={{marginTop:'2rem',textAlign:'center'}}>הרשימה שלך ריקה! 🎉 </p>}
                 

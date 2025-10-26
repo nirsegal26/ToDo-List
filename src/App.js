@@ -71,7 +71,25 @@ function App() {
       inputRef.current.focus(); 
     }
   }
+  const handleMoveUp = (id) => {
+    const index = items.findIndex(item => item.id === id);
+    if (index === 0) return; 
 
+    const newItems = [...items];
+    [newItems[index], newItems[index - 1]] = [newItems[index - 1], newItems[index]];
+
+    setAndSaveItems(newItems);
+}
+
+  const handleMoveDown = (id) => {
+    const index = items.findIndex(item => item.id === id);
+    if (index === items.length - 1) return;
+
+    const newItems = [...items];
+    [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
+
+    setAndSaveItems(newItems);
+}
   const uncheckedCount = items.filter(item => item.checked === false).length;
 
   return (
@@ -92,6 +110,8 @@ function App() {
       editItemText={editItemText} 
       setEditItemText={setEditItemText} 
       handleSave={handleSave} 
+      handleMoveUp={handleMoveUp}
+      handleMoveDown={handleMoveDown}
       /> 
       <Footer length ={uncheckedCount}/> 
 
