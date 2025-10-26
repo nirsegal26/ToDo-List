@@ -40,7 +40,9 @@ const LineItem = ({
           onChange={(e) => setEditItemText(e.target.value)}
         />
       ) : (
-        <label style={item.checked ? { textDecoration: 'line-through' } : null}>
+        <label 
+         onDoubleClick={() => handleCheck(item.id)}
+        style={item.checked ? { textDecoration: 'line-through' } : null}>
           {item.item}
         </label>
       )}

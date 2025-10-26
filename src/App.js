@@ -17,27 +17,25 @@ function App() {
   const [editItemText, setEditItemText] = useState('');
   const inputRef = useRef(null);
 
-  // שמירה אוטומטית ב-localStorage בכל שינוי של items
   useEffect(() => {
     localStorage.setItem('todolist', JSON.stringify(items));
   }, [items]);
 
   const addItem = (item) => {
     const myNewItem = { id: uuidv4(), checked: false, item };
-    const listItems = [myNewItem, ...items];
-    setItems(listItems);
+    setItems((prev) => [myNewItem, ...prev]);
   };
 
   const handleCheck = (id) => {
-    const updatedItems = items.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
+    setItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
     );
-    setItems(updatedItems);
   };
 
   const handleDelete = (id) => {
-    const listItems = items.filter((item) => item.id !== id);
-    setItems(listItems);
+    setItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   const handleEdit = (id) => {
@@ -47,10 +45,11 @@ function App() {
   };
 
   const handleSave = () => {
-    const listItems = items.map((item) =>
-      item.id === editingId ? { ...item, item: editItemText } : item
+    setItems((prev) =>
+      prev.map((item) =>
+        item.id === editingId ? { ...item, item: editItemText } : item
+      )
     );
-    setItems(listItems);
     setEditingId(null);
   };
 
@@ -63,21 +62,25 @@ function App() {
   };
 
   const handleMoveUp = (id) => {
-    setItems((prevItems) => {
-      const index = prevItems.findIndex((item) => item.id === id);
-      if (index <= 0) return prevItems;
-      const newItems = [...prevItems];
-      [newItems[index], newItems[index - 1]] = [newItems[index - 1], newItems[index]];
+    setItems((prev) => {
+      const index = prev.findIndex((item) => item.id === id);
+      if (index <= 0) return prev; 
+      const newItems = [...prev];
+      const temp = newItems[index];
+      newItems[index] = newItems[index - 1];
+      newItems[index - 1] = temp;
       return newItems;
     });
   };
 
   const handleMoveDown = (id) => {
-    setItems((prevItems) => {
-      const index = prevItems.findIndex((item) => item.id === id);
-      if (index === -1 || index >= prevItems.length - 1) return prevItems;
-      const newItems = [...prevItems];
-      [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
+    setItems((prev) => {
+      const index = prev.findIndex((item) => item.id === id);
+      if (index === -1 || index >= prev.length - 1) return prev; 
+      const newItems = [...prev];
+      const temp = newItems[index];
+      newItems[index] = newItems[index + 1];
+      newItems[index + 1] = temp;
       return newItems;
     });
   };
