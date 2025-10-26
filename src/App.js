@@ -27,10 +27,19 @@ function App() {
     setAndSaveItems(listItems);
   }
 
-  const handleCheck = (id) => {
-      const listItems = items.map((item) => item.id===id ? {...item, checked :!item.checked} : item);
-      setAndSaveItems(listItems);
-  }
+ const handleCheck = (id) => {
+    const updatedItems = items.map((item) => 
+    item.id === id ? { ...item, checked: !item.checked } : item
+);
+
+    const sortedListItems = updatedItems.sort((a, b) => {
+      if (a.checked && !b.checked) return 1;
+      if (!a.checked && b.checked) return -1;
+      return 0;
+ });
+      
+     setAndSaveItems(sortedListItems);
+ }
 
   const handleDelete = (id) => {
       const listItems = items.filter((item) => item.id !== id)
@@ -41,7 +50,7 @@ function App() {
     const itemToEdit = items.find(item => item.id === id);
     setEditingId(id); 
     setEditItemText(itemToEdit.item); 
-}
+  }
 
   const handleSave = () => {
     const listItems = items.map((item) => 
@@ -80,9 +89,9 @@ function App() {
       handleDelete={handleDelete}
       handleEdit={handleEdit}
       editingId={editingId} 
-      editItemText={editItemText} 
-      setEditItemText={setEditItemText} 
-      handleSave={handleSave} 
+      editItemText={editItemText} 
+      setEditItemText={setEditItemText} 
+      handleSave={handleSave} 
       /> 
       <Footer length ={uncheckedCount}/> 
 
